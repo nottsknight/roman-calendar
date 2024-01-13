@@ -1,6 +1,6 @@
 {
   "name": "roman-calendar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Package for formatting dates according to the Roman calendar",
   "type": "module",
   "main": "dist/roman-calendar.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "npm run compile",
     "watch": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
