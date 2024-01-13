@@ -117,12 +117,14 @@ function getRomanDate(date: Date, long = true): string {
   const year = getRomanYear(date.getFullYear());
 
   if (day === 1) {
-    return `Kalendis ${monthName} ${year}`;
+    const kalendsText = long ? 'Kalendis' : 'Kal.';
+    return `${kalendsText} ${monthName} ${year}`;
   }
 
   const nones = nonesDate(month);
   if (day === nones) {
-    return `Nonis ${monthName} ${year}`;
+    const nonesText = long ? 'Nonis' : 'Non.';
+    return `${nonesText} ${monthName} ${year}`;
   }
 
   if (day < nones) {
@@ -133,7 +135,8 @@ function getRomanDate(date: Date, long = true): string {
 
   const ides = nones + 8;
   if (day === ides) {
-    return `Idibus ${monthName} ${year}`;
+    const idesText = long ? 'Idibus' : 'Eid.';
+    return `${idesText} ${monthName} ${year}`;
   }
 
   if (day < ides) {
