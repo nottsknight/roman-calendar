@@ -1,6 +1,6 @@
 import {convert} from 'roman-numeral';
 
-function nones_date(month: number): number {
+function nonesDate(month: number): number {
   switch (month) {
     case 2:
     case 4:
@@ -12,7 +12,7 @@ function nones_date(month: number): number {
   }
 }
 
-function month_length(month: number): number {
+function monthLength(month: number): number {
   switch (month) {
     case 3:
     case 5:
@@ -26,7 +26,7 @@ function month_length(month: number): number {
   }
 }
 
-function number_name(num: number, long = true): string {
+function numberName(num: number, long = true): string | null {
   switch (num) {
     case 2:
       return long ? 'Pridie' : 'Prid.';
@@ -65,11 +65,11 @@ function number_name(num: number, long = true): string {
     case 19:
       return long ? 'ante diem undevicesimum' : 'a.d. XIX';
     default:
-      return '';
+      return null;
   }
 }
 
-function month_name(month: number, long = true): string {
+function getMonthName(month: number, long = true): string | null {
   switch (month) {
     case 0:
       return long ? 'Ianuarius' : 'Ian.';
@@ -96,81 +96,56 @@ function month_name(month: number, long = true): string {
     case 11:
       return long ? 'December' : 'Dec.';
     default:
-      return '';
+      return null;
   }
 }
 
-export function get_roman_year(year: number): string {
+export function getRomanYear(year: number): string {
   return `${convert(year + 753)}`;
 }
 
-export function get_roman_short_date(date: Date): string {
+function getRomanDate(date: Date, long = true): string {
   const day = date.getDate();
   const month = date.getMonth();
-  const year = date.getFullYear();
+  const monthName = getMonthName(month, long);
+  const year = getRomanYear(date.getFullYear());
+
   if (day === 1) {
-    return `Kalendis ${month_name(month, false)} ${get_roman_year(year)}`;
+    return `Kalendis ${monthName} ${year}`;
   }
 
-  const nones = nones_date(month);
+  const nones = nonesDate(month);
   if (day === nones) {
-    return `Nonis ${month_name(month)} ${get_roman_year(year)}`;
-  } else if (day < nones) {
+    return `Nonis ${monthName} ${year}`;
+  }
+
+  if (day < nones) {
     const diff = nones - day + 1;
-    return `${number_name(diff, false)} Non. ${month_name(
-      month,
-      false
-    )} ${get_roman_year(year)}`;
+    const nonesText = long ? 'Nonas' : 'Non.';
+    return `${numberName(diff, long)} ${nonesText} ${monthName} ${year}`;
   }
 
   const ides = nones + 8;
   if (day === ides) {
-    return `Ides ${month_name(month)} ${get_roman_year(year)}`;
-  } else if (day < ides) {
-    const diff = nones - day + 1;
-    return `${number_name(diff, false)} Eid. ${month_name(
-      month,
-      false
-    )} ${get_roman_year(year)}`;
+    return `Idibus ${monthName} ${year}`;
   }
 
-  const diff = month_length(month) - day + 1;
-  return `${number_name(diff, false)} Kal. ${month_name(
-    month + 1,
-    false
-  )} ${get_roman_year(year)}`;
+  if (day < ides) {
+    const diff = ides - day + 1;
+    const idesText = long ? 'Idus' : 'Eid.';
+    return `${numberName(diff, long)} ${idesText} ${monthName} ${year}`;
+  }
+
+  const lastDay = monthLength(month);
+  const diff = lastDay - day + 1;
+  const text = long ? 'Kalendas' : 'Kal.';
+  return `${numberName(diff, long)} ${text} ${monthName} ${year}`;
 }
 
-export function get_roman_long_date(date: Date): string {
-  const day = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  if (day === 1) {
-    return `Kalendis ${month_name(month)} ${get_roman_year(year)}`;
-  }
+export function getRomanShortDate(date: Date): string {
+  return getRomanDate(date, false);
+}
 
-  const nones = nones_date(month);
-  if (day === nones) {
-    return `Nonis ${month_name(month)} ${get_roman_year(year)}`;
-  } else if (day < nones) {
-    const diff = nones - day + 1;
-    return `${number_name(diff)} Nonas ${month_name(month)} ${get_roman_year(
-      year
-    )}`;
-  }
-
-  const ides = nones + 8;
-  if (day === ides) {
-    return `Ides ${month_name(month)} ${get_roman_year(year)}`;
-  } else if (day < ides) {
-    const diff = nones - day + 1;
-    return `${number_name(diff)} Idus ${month_name(month)} ${get_roman_year(
-      year
-    )}`;
-  }
-
-  const diff = month_length(month) - day + 1;
-  return `${number_name(diff)} Kalendas ${month_name(
-    month + 1
-  )} ${get_roman_year(year)}`;
+export function getRomanLongDate(date: Date): string {
+  return getRomanDate(date, true);
 }
