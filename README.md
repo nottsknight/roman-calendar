@@ -5,7 +5,9 @@ specifically according to the Imperial calendar after the Julian reforms.
 
 The module exports three functions:
 - `getRomanYear` converts a given year BC/AD into a year AUC 
-  (_ad urbe conditum_) and formats it in Roman numerals
+  (_ab urbe condita_) and formats it in Roman numerals
+  - the city of Rome is traditionally said to have been founded in 753 BC
+    so `getRomanYear` returns the given year plus 753
 - `getRomanLongDate` converts a given date into its full Latin form
 - `getRomanShortDate` converts a given date into an abbreviated form
 

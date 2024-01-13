@@ -100,6 +100,12 @@ function getMonthName(month: number, long = true): string | null {
   }
 }
 
+/**
+ * Converts a given common era year into the Roman numeral representation of the corresponding AUC year.
+ *
+ * @param year common era year
+ * @returns AUC year in Roman numberals
+ */
 export function getRomanYear(year: number): string {
   return `${convert(year + 753)}`;
 }
@@ -142,10 +148,22 @@ function getRomanDate(date: Date, long = true): string {
   return `${numberName(diff, long)} ${text} ${monthName} ${year}`;
 }
 
+/**
+ * Format the given date into its abbreviated Latin form.
+ *
+ * @param date date to convert
+ * @returns the formatted string
+ */
 export function getRomanShortDate(date: Date): string {
   return getRomanDate(date, false);
 }
 
+/**
+ * Format the given date into its full Latin form.
+ *
+ * @param date date to convert
+ * @returns the formatted string
+ */
 export function getRomanLongDate(date: Date): string {
   return getRomanDate(date, true);
 }
