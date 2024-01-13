@@ -113,7 +113,7 @@ export function getRomanYear(year: number): string {
 function getRomanDate(date: Date, long = true): string {
   const day = date.getDate();
   const month = date.getMonth();
-  const monthName = getMonthName(month, long);
+  let monthName = getMonthName(month, long);
   const year = getRomanYear(date.getFullYear());
 
   if (day === 1) {
@@ -148,6 +148,7 @@ function getRomanDate(date: Date, long = true): string {
   const lastDay = monthLength(month);
   const diff = lastDay - day + 1;
   const text = long ? 'Kalendas' : 'Kal.';
+  monthName = getMonthName(month + 1, long);
   return `${numberName(diff, long)} ${text} ${monthName} ${year}`;
 }
 

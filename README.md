@@ -11,7 +11,21 @@ The module exports three functions:
 - `getRomanLongDate` converts a given date into its full Latin form
 - `getRomanShortDate` converts a given date into an abbreviated form
 
+The module also provides a script `kalendarium` that will format the provided
+ISO date string and print the result to the console. If not argument is given
+it will format the current date.
+
 ## Examples
+Using the `kalendarium` script:
+
+```
+$ kalendarium 2000-01-25
+a.d. VIII Kal. Feb. MMDCCLIII
+ante diem octavum Kalendas Februarius MMDCCLIII
+```
+
+Using the library in your own script:
+
 ```typescript
 import { get_roman_short_date, get_roman_long_date } from "roman-calendar";
 
