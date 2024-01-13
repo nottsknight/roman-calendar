@@ -1,10 +1,13 @@
 {
   "name": "roman-calendar",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Package for formatting dates according to the Roman calendar",
-  "type": "module",
-  "main": "dist/roman-calendar.js",
-  "module": "dist/roman-calendar.js",
+  "homepage": "https://github.com/nottsknight/roman-calendar",
+  "main": "dist/src/roman-calendar.js",
+  "module": "dist/src/roman-calendar.js",
+  "bin": {
+    "kalendarium": "dist/src/kalendarium.js"
+  },
   "scripts": {
     "prepare": "npm run compile",
     "watch": "tsc -w",
@@ -16,8 +19,15 @@
     "pretest": "npm run compile",
     "posttest": "npm run lint"
   },
-  "author": "Ian Knight <ian.knight.1990@gmail.com>",
+  "author": {
+    "name": "Ian Knight",
+    "email": "ian.knight.1990@gmail.com"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nottsknight/roman-calendar"
+  },
   "dependencies": {
     "roman-numeral": "^0.2.6"
   },
