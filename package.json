@@ -1,0 +1,29 @@
+{
+  "name": "roman-calendar",
+  "version": "0.1.0",
+  "description": "Package for formatting dates according to the Roman calendar",
+  "type": "module",
+  "main": "dist/roman-calendar.js",
+  "module": "dist/roman-calendar.js",
+  "scripts": {
+    "prepare": "npm run compile",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
+  },
+  "author": "Ian Knight <ian.knight.1990@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "roman-numeral": "^0.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "20.8.2",
+    "gts": "^5.2.0",
+    "typescript": "~5.2.0"
+  }
+}
