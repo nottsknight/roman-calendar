@@ -72,29 +72,29 @@ function numberName(num: number, long = true): string | null {
 function getMonthName(month: number, long = true): string | null {
   switch (month) {
     case 0:
-      return long ? 'Ianuarius' : 'Ian.';
+      return long ? 'Ianuarii' : 'Ian.';
     case 1:
-      return long ? 'Februarius' : 'Feb.';
+      return long ? 'Februarii' : 'Feb.';
     case 2:
-      return long ? 'Martius' : 'Mar.';
+      return long ? 'Martii' : 'Mar.';
     case 3:
       return long ? 'Aprilis' : 'Apr.';
     case 4:
-      return long ? 'Maius' : 'Mai.';
+      return long ? 'Maii' : 'Mai.';
     case 5:
-      return long ? 'Iunius' : 'Iun.';
+      return long ? 'Iunii' : 'Iun.';
     case 6:
-      return long ? 'Iulius' : 'Iul.';
+      return long ? 'Iulii' : 'Iul.';
     case 7:
       return long ? 'Augustus' : 'Aug.';
     case 8:
-      return long ? 'September' : 'Sep.';
+      return long ? 'Septembris' : 'Sep.';
     case 9:
-      return long ? 'October' : 'Oct.';
+      return long ? 'Octobris' : 'Oct.';
     case 10:
-      return long ? 'November' : 'Nov.';
+      return long ? 'Novembris' : 'Nov.';
     case 11:
-      return long ? 'December' : 'Dec.';
+      return long ? 'Decembris' : 'Dec.';
     default:
       return null;
   }
