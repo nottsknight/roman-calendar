@@ -1,17 +1,16 @@
 {
   "name": "roman-calendar",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Package for formatting dates according to the Roman calendar",
   "homepage": "https://github.com/nottsknight/roman-calendar",
-  "main": "dist/src/roman-calendar.js",
-  "module": "dist/src/roman-calendar.js",
+  "exports": "./dist/src/roman-calendar.js",
   "bin": {
     "kalendarium": "dist/src/kalendarium.js"
   },
   "scripts": {
     "prepare": "npm run compile",
     "watch": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "jasmine",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
@@ -28,12 +27,12 @@
     "type": "git",
     "url": "https://github.com/nottsknight/roman-calendar"
   },
-  "dependencies": {
-    "roman-numeral": "^0.2.6"
-  },
   "devDependencies": {
+    "@types/jasmine": "^5.1.4",
     "@types/node": "20.8.2",
     "gts": "^5.2.0",
+    "jasmine": "^5.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.2.0"
   }
 }

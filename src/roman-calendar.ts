@@ -1,4 +1,4 @@
-import {convert} from 'roman-numeral';
+import {getRomanNumeral} from './roman-numerals';
 
 function nonesDate(month: number): number {
   switch (month) {
@@ -72,42 +72,44 @@ function numberName(num: number, long = true): string | null {
 function getMonthName(month: number, long = true): string | null {
   switch (month) {
     case 0:
-      return long ? 'Ianuarius' : 'Ian.';
+      return long ? 'Ianuarii' : 'Ian.';
     case 1:
-      return long ? 'Februarius' : 'Feb.';
+      return long ? 'Februarii' : 'Feb.';
     case 2:
-      return long ? 'Martius' : 'Mar.';
+      return long ? 'Martii' : 'Mar.';
     case 3:
       return long ? 'Aprilis' : 'Apr.';
     case 4:
-      return long ? 'Maius' : 'Mai.';
+      return long ? 'Maii' : 'Mai.';
     case 5:
-      return long ? 'Iunius' : 'Iun.';
+      return long ? 'Iunii' : 'Iun.';
     case 6:
-      return long ? 'Iulius' : 'Iul.';
+      return long ? 'Iulii' : 'Iul.';
     case 7:
       return long ? 'Augustus' : 'Aug.';
     case 8:
-      return long ? 'September' : 'Sep.';
+      return long ? 'Septembris' : 'Sep.';
     case 9:
-      return long ? 'October' : 'Oct.';
+      return long ? 'Octobris' : 'Oct.';
     case 10:
-      return long ? 'November' : 'Nov.';
+      return long ? 'Novembris' : 'Nov.';
     case 11:
-      return long ? 'December' : 'Dec.';
+      return long ? 'Decembris' : 'Dec.';
     default:
       return null;
   }
 }
 
 /**
- * Converts a given common era year into the Roman numeral representation of the corresponding AUC year.
+ * Converts a given common era (BC/AD) year into the Roman numeral representation of the
+ * corresponding AUC year.
  *
  * @param year common era year
  * @returns AUC year in Roman numberals
  */
 export function getRomanYear(year: number): string {
-  return `${convert(year + 753)}`;
+  const auc = year > 1 ? year + 753 : 754 - year;
+  return `${getRomanNumeral(auc)}`;
 }
 
 function getRomanDate(date: Date, long = true): string {
@@ -153,7 +155,7 @@ function getRomanDate(date: Date, long = true): string {
 }
 
 /**
- * Format the given date into its abbreviated Latin form.
+ * Format the given date into its abbreviated Roman form.
  *
  * @param date date to convert
  * @returns the formatted string
@@ -163,7 +165,7 @@ export function getRomanShortDate(date: Date): string {
 }
 
 /**
- * Format the given date into its full Latin form.
+ * Format the given date into its full Roman form.
  *
  * @param date date to convert
  * @returns the formatted string
