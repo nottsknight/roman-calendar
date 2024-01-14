@@ -1,4 +1,4 @@
-import {convert} from 'roman-numeral';
+import {getRomanNumeral} from './roman-numerals';
 
 function nonesDate(month: number): number {
   switch (month) {
@@ -107,7 +107,8 @@ function getMonthName(month: number, long = true): string | null {
  * @returns AUC year in Roman numberals
  */
 export function getRomanYear(year: number): string {
-  return `${convert(year + 753)}`;
+  const auc = year > 1 ? year + 753 : 754 - year;
+  return `${getRomanNumeral(auc)}`;
 }
 
 function getRomanDate(date: Date, long = true): string {
