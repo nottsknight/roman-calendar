@@ -21,4 +21,14 @@ describe('getRomanNumeral', () => {
       expect(num as string).toBe(roman as string);
     });
   }
+
+  it('should fail to convert 0', () => {
+    const num = getRomanNumeral(0);
+    expect(num).toBeFalsy();
+  });
+
+  it('should fail to convert greater than 4000', () => {
+    const num = getRomanNumeral(4000);
+    expect(num).toBeFalsy();
+  });
 });

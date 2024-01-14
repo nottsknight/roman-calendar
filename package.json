@@ -3,8 +3,7 @@
   "version": "0.3.0",
   "description": "Package for formatting dates according to the Roman calendar",
   "homepage": "https://github.com/nottsknight/roman-calendar",
-  "main": "dist/src/roman-calendar.js",
-  "module": "dist/src/roman-calendar.js",
+  "exports": "./dist/src/roman-calendar.js",
   "bin": {
     "kalendarium": "dist/src/kalendarium.js"
   },
