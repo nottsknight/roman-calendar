@@ -19,12 +19,12 @@ describe('RomanCalendar', () => {
 
   it('produces a correct short date string', () => {
     const d = new RomanDate('2024-03-03');
-    expect(d.toShortRomanDateString()).toEqual('a.d. V Non. Mar. MMDCCLXXVII');
+    expect(d.toShortRomanString()).toEqual('a.d. V Non. Mar. MMDCCLXXVII');
   });
 
   it('produces a correct long date string', () => {
     const d = new RomanDate('2024-03-03');
-    expect(d.toLongRomanDateString()).toEqual(
+    expect(d.toLongRomanString()).toEqual(
       'ante diem quintum Nonas Martii MMDCCLXXVII'
     );
   });

@@ -113,11 +113,11 @@ export class RomanDate extends Date {
     }
   }
 
-  public toShortRomanDateString(): string {
+  public toShortRomanString(): string {
     return this.getRomanDate(false);
   }
 
-  public toLongRomanDateString(): string {
+  public toLongRomanString(): string {
     return this.getRomanDate(true);
   }
 
