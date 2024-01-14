@@ -73,6 +73,12 @@ function getUnits(num: number): string {
   }
 }
 
+/**
+ * Convert the given number into Roman numerals. Only works for values `1 >= num > 4000`.
+ *
+ * @param num number to convert
+ * @returns the Roman numeral or `null` if conversion failed
+ */
 export function getRomanNumeral(num: number): string | null {
   if (num < 1 || num > 3999) {
     return null;
