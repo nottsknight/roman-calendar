@@ -20,7 +20,7 @@ it will format the current date.
 
 Using the `kalendarium` script:
 
-```
+```console
 $ kalendarium 2000-01-25
 a.d. VIII Kal. Feb. MMDCCLIII
 ante diem octavum Kalendas Februarius MMDCCLIII
@@ -29,11 +29,10 @@ ante diem octavum Kalendas Februarius MMDCCLIII
 Using the library in your own script:
 
 ```typescript
-import {getRomanShortDate, getRomanLongDate} from 'roman-calendar';
+import {RomanDate} from 'roman-calendar';
 
 // assuming the current date is 25 January 2000
-const short_date = getRomanShortDate(Date());
-console.log(short_date); // a.d. VIII Kal. Feb. MMDCCLIII
-const long_date = getRomanLongDate(Date());
-console.log(long_date); // ante diem octavum Kalendas Februarius MMDCCLIII
+const date = new RomanDate('2000-01-25');
+console.log(date.toShortRomanString()); // a.d. VIII Kal. Feb. MMDCCLIII
+console.log(date.toLongRomanString()); // ante diem octavum Kalendas Februarii MMDCCLIII
 ```

@@ -105,7 +105,11 @@ function getMonthName(month: number, long = true): string | null {
  * the Roman method.
  */
 export class RomanDate extends Date {
-  public constructor(date?: number | string | Date) {
+  /**
+   * Construct a new `RomanDate`.
+   * @param date a UNIX timestamp, an ISO date string, or an existing `Date` object
+   */
+  constructor(date?: number | string | Date) {
     if (date) {
       super(date);
     } else {
@@ -113,11 +117,17 @@ export class RomanDate extends Date {
     }
   }
 
-  public toShortRomanString(): string {
+  /**
+   * Return an abbreviated string representing this date according to the Roman calendar.
+   */
+  toShortRomanString(): string {
     return this.getRomanDate(false);
   }
 
-  public toLongRomanString(): string {
+  /**
+   * Return a full string representing this date according to the Roman calendar.
+   */
+  toLongRomanString(): string {
     return this.getRomanDate(true);
   }
 
@@ -125,7 +135,10 @@ export class RomanDate extends Date {
     const day = this.getDate();
     const month = this.getMonth();
     let monthName = getMonthName(month, long);
-    const year = getRomanYear(this.getFullYear());
+
+    const ceYear = this.getFullYear();
+    const auc = ceYear > 1 ? ceYear + 753 : 754 - ceYear;
+    const year = getRomanNumeral(auc);
 
     if (day === 1) {
       const kalendsText = long ? 'Kalendis' : 'Kal.';
@@ -162,16 +175,4 @@ export class RomanDate extends Date {
     monthName = getMonthName(month + 1, long);
     return `${numberName(diff, long)} ${text} ${monthName} ${year}`;
   }
-}
-
-/**
- * Converts a given common era (BC/AD) year into the Roman numeral representation of the
- * corresponding AUC year.
- *
- * @param year common era year
- * @returns AUC year in Roman numberals
- */
-export function getRomanYear(year: number): string {
-  const auc = year > 1 ? year + 753 : 754 - year;
-  return `${getRomanNumeral(auc)}`;
 }
