@@ -101,75 +101,78 @@ function getMonthName(month: number, long = true): string | null {
 }
 
 /**
- * Converts a given common era (BC/AD) year into the Roman numeral representation of the
- * corresponding AUC year.
- *
- * @param year common era year
- * @returns AUC year in Roman numberals
+ * Extension of the `Date` class to provide date formatting according to
+ * the Roman method.
  */
-export function getRomanYear(year: number): string {
-  const auc = year > 1 ? year + 753 : 754 - year;
-  return `${getRomanNumeral(auc)}`;
-}
-
-function getRomanDate(date: Date, long = true): string {
-  const day = date.getDate();
-  const month = date.getMonth();
-  let monthName = getMonthName(month, long);
-  const year = getRomanYear(date.getFullYear());
-
-  if (day === 1) {
-    const kalendsText = long ? 'Kalendis' : 'Kal.';
-    return `${kalendsText} ${monthName} ${year}`;
+export class RomanDate extends Date {
+  /**
+   * Construct a new `RomanDate`.
+   * @param date a UNIX timestamp, an ISO date string, or an existing `Date` object
+   */
+  constructor(date?: number | string | Date) {
+    if (date) {
+      super(date);
+    } else {
+      super();
+    }
   }
 
-  const nones = nonesDate(month);
-  if (day === nones) {
-    const nonesText = long ? 'Nonis' : 'Non.';
-    return `${nonesText} ${monthName} ${year}`;
+  /**
+   * Return an abbreviated string representing this date according to the Roman calendar.
+   */
+  toShortRomanString(): string {
+    return this.getRomanDate(false);
   }
 
-  if (day < nones) {
-    const diff = nones - day + 1;
-    const nonesText = long ? 'Nonas' : 'Non.';
-    return `${numberName(diff, long)} ${nonesText} ${monthName} ${year}`;
+  /**
+   * Return a full string representing this date according to the Roman calendar.
+   */
+  toLongRomanString(): string {
+    return this.getRomanDate(true);
   }
 
-  const ides = nones + 8;
-  if (day === ides) {
-    const idesText = long ? 'Idibus' : 'Eid.';
-    return `${idesText} ${monthName} ${year}`;
+  private getRomanDate(long = true): string {
+    const day = this.getDate();
+    const month = this.getMonth();
+    let monthName = getMonthName(month, long);
+
+    const ceYear = this.getFullYear();
+    const auc = ceYear > 1 ? ceYear + 753 : 754 - ceYear;
+    const year = getRomanNumeral(auc);
+
+    if (day === 1) {
+      const kalendsText = long ? 'Kalendis' : 'Kal.';
+      return `${kalendsText} ${monthName} ${year}`;
+    }
+
+    const nones = nonesDate(month);
+    if (day === nones) {
+      const nonesText = long ? 'Nonis' : 'Non.';
+      return `${nonesText} ${monthName} ${year}`;
+    }
+
+    if (day < nones) {
+      const diff = nones - day + 1;
+      const nonesText = long ? 'Nonas' : 'Non.';
+      return `${numberName(diff, long)} ${nonesText} ${monthName} ${year}`;
+    }
+
+    const ides = nones + 8;
+    if (day === ides) {
+      const idesText = long ? 'Idibus' : 'Eid.';
+      return `${idesText} ${monthName} ${year}`;
+    }
+
+    if (day < ides) {
+      const diff = ides - day + 1;
+      const idesText = long ? 'Idus' : 'Eid.';
+      return `${numberName(diff, long)} ${idesText} ${monthName} ${year}`;
+    }
+
+    const lastDay = monthLength(month);
+    const diff = lastDay - day + 1;
+    const text = long ? 'Kalendas' : 'Kal.';
+    monthName = getMonthName(month + 1, long);
+    return `${numberName(diff, long)} ${text} ${monthName} ${year}`;
   }
-
-  if (day < ides) {
-    const diff = ides - day + 1;
-    const idesText = long ? 'Idus' : 'Eid.';
-    return `${numberName(diff, long)} ${idesText} ${monthName} ${year}`;
-  }
-
-  const lastDay = monthLength(month);
-  const diff = lastDay - day + 1;
-  const text = long ? 'Kalendas' : 'Kal.';
-  monthName = getMonthName(month + 1, long);
-  return `${numberName(diff, long)} ${text} ${monthName} ${year}`;
-}
-
-/**
- * Format the given date into its abbreviated Roman form.
- *
- * @param date date to convert
- * @returns the formatted string
- */
-export function getRomanShortDate(date: Date): string {
-  return getRomanDate(date, false);
-}
-
-/**
- * Format the given date into its full Roman form.
- *
- * @param date date to convert
- * @returns the formatted string
- */
-export function getRomanLongDate(date: Date): string {
-  return getRomanDate(date, true);
 }

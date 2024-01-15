@@ -1,6 +1,6 @@
 {
   "name": "roman-calendar",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Package for formatting dates according to the Roman calendar",
   "homepage": "https://github.com/nottsknight/roman-calendar",
   "exports": "./dist/src/roman-calendar.js",
@@ -14,6 +14,7 @@
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
+    "postcompile": "for f in $(ls dist/src | grep -e '\\.js$'); do jsmin -l 2 --overwrite dist/src/$f; done",
     "fix": "gts fix",
     "pretest": "npm run compile",
     "posttest": "npm run lint"
@@ -32,7 +33,7 @@
     "@types/node": "20.8.2",
     "gts": "^5.2.0",
     "jasmine": "^5.1.0",
-    "ts-node": "^10.9.2",
+    "jsmin": "^1.0.1",
     "typescript": "~5.2.0"
   }
 }
