@@ -14,6 +14,7 @@
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
+    "postcompile": "for f in $(ls dist/src | grep -e '\\.js$'); do jsmin -l 2 --overwrite dist/src/$f; done",
     "fix": "gts fix",
     "pretest": "npm run compile",
     "posttest": "npm run lint"
@@ -32,6 +33,7 @@
     "@types/node": "20.8.2",
     "gts": "^5.2.0",
     "jasmine": "^5.1.0",
+    "jsmin": "^1.0.1",
     "ts-node": "^10.9.2",
     "typescript": "~5.2.0"
   }
