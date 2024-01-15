@@ -3,14 +3,10 @@
 JS library for formatting dates according to the Roman calendar,
 specifically according to the Imperial calendar after the Julian reforms.
 
-The module exports three functions:
-
-- `getRomanYear` converts a given year BC/AD into a year AUC
-  (_ab urbe condita_) and formats it in Roman numerals
-  - the city of Rome is traditionally said to have been founded in 753 BC
-    so `getRomanYear` returns the given year plus 753
-- `getRomanLongDate` converts a given date into its full Latin form
-- `getRomanShortDate` converts a given date into an abbreviated form
+The module exports a `RomanDate` class which is a subclass of the builtin
+`Date`. `RomanDate` provides two methods for date formatting:
+- `toShortRomanDate` returns an abbreviated date string
+- `toLongRomanDate` returns a fully spelled-out date string
 
 The module also provides a script `kalendarium` that will format the provided
 ISO date string and print the result to the console. If no argument is given
