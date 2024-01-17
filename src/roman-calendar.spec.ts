@@ -1,4 +1,4 @@
-import {RomanDate} from '../src/roman-calendar';
+import {RomanDate} from './roman-calendar';
 
 describe('RomanCalendar', () => {
   it('can be constructed with timestamp', () => {
@@ -27,5 +27,25 @@ describe('RomanCalendar', () => {
     expect(d.toLongRomanString()).toEqual(
       'ante diem quintum Nonas Martii MMDCCLXXVII'
     );
+  });
+
+  describe('leap year calculation', () => {
+    it('correctly labels intercalary leap day', () => {
+      const d = new RomanDate('2024-02-24');
+      expect(d.toShortRomanString()).toEqual(
+        'a.d. bis VI Kal. Mar. MMDCCLXXVII'
+      );
+    });
+
+    it('correctly labels days either side of intercalary day', () => {
+      const d = new RomanDate('2024-02-22');
+      expect(d.toShortRomanString()).toEqual('a.d. VIII Kal. Mar. MMDCCLXXVII');
+      d.setDate(23);
+      expect(d.toShortRomanString()).toEqual('a.d. VII Kal. Mar. MMDCCLXXVII');
+      d.setDate(25);
+      expect(d.toShortRomanString()).toEqual('a.d. VI Kal. Mar. MMDCCLXXVII');
+      d.setDate(26);
+      expect(d.toShortRomanString()).toEqual('a.d. V Kal. Mar. MMDCCLXXVII');
+    });
   });
 });

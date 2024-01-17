@@ -1,5 +1,7 @@
 # roman-calendar
 
+[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+
 JS library for formatting dates according to the Roman calendar,
 specifically according to the Imperial calendar after the Julian reforms.
 
