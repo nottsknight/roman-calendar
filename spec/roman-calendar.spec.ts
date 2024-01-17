@@ -28,4 +28,22 @@ describe('RomanCalendar', () => {
       'ante diem quintum Nonas Martii MMDCCLXXVII'
     );
   });
+
+  it('correctly inserts intercalary day in leap years', () => {
+    const d = new RomanDate('2024-02-23');
+    expect(d.toShortRomanString()).toEqual('a.d. bis VI Kal. Mar. MMDCCLXXVII');
+    d.setDate(22);
+    expect(d.toShortRomanString()).toEqual('a.d. VII Kal. Mar. MMDCCLXXVII');
+    d.setDate(24);
+    expect(d.toShortRomanString()).toEqual('a.d. VI Kal. Mar. MMDCCLXXVII');
+  });
+
+  it('correctly calculates the length of February', () => {
+    const d = new RomanDate('2024-02-29');
+    expect(d.toShortRomanString()).toEqual('Prid. Kal. Mar. MMDCCLXXVII');
+    d.setDate(28);
+    expect(d.toShortRomanString()).toEqual('a.d. III Kal. Mar. MMDCCLXXVII');
+    d.setFullYear(2023);
+    expect(d.toShortRomanString()).toEqual('Prid. Kal. Mar. MMDCCLXXVII');
+  });
 });
