@@ -12,7 +12,7 @@ function nonesDate(month: number): number {
   }
 }
 
-function monthLength(month: number): number {
+function monthLength(month: number, leapYear: boolean): number {
   switch (month) {
     case 3:
     case 5:
@@ -20,13 +20,13 @@ function monthLength(month: number): number {
     case 10:
       return 30;
     case 1:
-      return 28;
+      return leapYear ? 29 : 28;
     default:
       return 31;
   }
 }
 
-function numberName(num: number, long = true): string | null {
+function numberName(num: number, long: boolean): string | null {
   switch (num) {
     case 2:
       return long ? 'Pridie' : 'Prid.';
@@ -69,7 +69,7 @@ function numberName(num: number, long = true): string | null {
   }
 }
 
-function getMonthName(month: number, long = true): string | null {
+function getMonthName(month: number, long: boolean): string | null {
   switch (month) {
     case 0:
       return long ? 'Ianuarii' : 'Ian.';
@@ -134,11 +134,13 @@ export class RomanDate extends Date {
   private getRomanDate(long = true): string {
     const day = this.getDate();
     const month = this.getMonth();
-    let monthName = getMonthName(month, long);
 
     const ceYear = this.getFullYear();
+    const isLeapYear = ceYear > 0 && ceYear % 4 === 0 && month === 1;
     const auc = ceYear > 1 ? ceYear + 753 : 754 - ceYear;
     const year = getRomanNumeral(auc);
+
+    let monthName = getMonthName(month, long);
 
     if (day === 1) {
       const kalendsText = long ? 'Kalendis' : 'Kal.';
@@ -169,10 +171,17 @@ export class RomanDate extends Date {
       return `${numberName(diff, long)} ${idesText} ${monthName} ${year}`;
     }
 
-    const lastDay = monthLength(month);
-    const diff = lastDay - day + 1;
+    const lastDay = monthLength(month, isLeapYear);
+    const diff = lastDay - day + 2;
     const text = long ? 'Kalendas' : 'Kal.';
     monthName = getMonthName(month + 1, long);
-    return `${numberName(diff, long)} ${text} ${monthName} ${year}`;
+
+    if (isLeapYear && diff === 7) {
+      const num = long ? 'ante diem bis sextum' : 'a.d. bis VI';
+      return `${num} ${text} ${monthName} ${year}`;
+    }
+
+    const num = diff > 7 ? numberName(diff - 1, long) : numberName(diff, long);
+    return `${num} ${text} ${monthName} ${year}`;
   }
 }

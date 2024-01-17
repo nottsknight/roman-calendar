@@ -1,4 +1,4 @@
-import {getRomanNumeral} from '../src/roman-numerals';
+import {getRomanNumeral} from './roman-numerals';
 
 describe('getRomanNumeral', () => {
   for (const [arabic, roman] of [

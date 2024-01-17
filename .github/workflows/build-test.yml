@@ -1,0 +1,15 @@
+name: Build and test
+
+on:
+  push:
+    branches: ["develop", "master"]
+  pull_request:
+    branches: ["develop", "master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run test
