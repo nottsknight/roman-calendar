@@ -1,4 +1,4 @@
-import {RomanDate} from '../src/roman-calendar';
+import {RomanDate} from './roman-calendar';
 
 describe('RomanCalendar', () => {
   it('can be constructed with timestamp', () => {
