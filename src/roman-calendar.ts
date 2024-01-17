@@ -134,12 +134,13 @@ export class RomanDate extends Date {
   private getRomanDate(long = true): string {
     const day = this.getDate();
     const month = this.getMonth();
-    let monthName = getMonthName(month, long);
 
     const ceYear = this.getFullYear();
     const isLeapYear = ceYear > 0 && ceYear % 4 === 0 && month === 1;
     const auc = ceYear > 1 ? ceYear + 753 : 754 - ceYear;
     const year = getRomanNumeral(auc);
+
+    let monthName = getMonthName(month, long);
 
     if (day === 1) {
       const kalendsText = long ? 'Kalendis' : 'Kal.';
@@ -171,7 +172,7 @@ export class RomanDate extends Date {
     }
 
     const lastDay = monthLength(month, isLeapYear);
-    const diff = lastDay - day + 1;
+    const diff = lastDay - day + 2;
     const text = long ? 'Kalendas' : 'Kal.';
     monthName = getMonthName(month + 1, long);
 

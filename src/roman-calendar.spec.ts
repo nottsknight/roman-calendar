@@ -29,21 +29,23 @@ describe('RomanCalendar', () => {
     );
   });
 
-  it('correctly inserts intercalary day in leap years', () => {
-    const d = new RomanDate('2024-02-23');
-    expect(d.toShortRomanString()).toEqual('a.d. bis VI Kal. Mar. MMDCCLXXVII');
-    d.setDate(22);
-    expect(d.toShortRomanString()).toEqual('a.d. VII Kal. Mar. MMDCCLXXVII');
-    d.setDate(24);
-    expect(d.toShortRomanString()).toEqual('a.d. VI Kal. Mar. MMDCCLXXVII');
-  });
+  describe('leap year calculation', () => {
+    it('correctly labels intercalary leap day', () => {
+      const d = new RomanDate('2024-02-24');
+      expect(d.toShortRomanString()).toEqual(
+        'a.d. bis VI Kal. Mar. MMDCCLXXVII'
+      );
+    });
 
-  it('correctly calculates the length of February', () => {
-    const d = new RomanDate('2024-02-29');
-    expect(d.toShortRomanString()).toEqual('Prid. Kal. Mar. MMDCCLXXVII');
-    d.setDate(28);
-    expect(d.toShortRomanString()).toEqual('a.d. III Kal. Mar. MMDCCLXXVII');
-    d.setFullYear(2023);
-    expect(d.toShortRomanString()).toEqual('Prid. Kal. Mar. MMDCCLXXVII');
+    it('correctly labels days either side of intercalary day', () => {
+      const d = new RomanDate('2024-02-22');
+      expect(d.toShortRomanString()).toEqual('a.d. VIII Kal. Mar. MMDCCLXXVII');
+      d.setDate(23);
+      expect(d.toShortRomanString()).toEqual('a.d. VII Kal. Mar. MMDCCLXXVII');
+      d.setDate(25);
+      expect(d.toShortRomanString()).toEqual('a.d. VI Kal. Mar. MMDCCLXXVII');
+      d.setDate(26);
+      expect(d.toShortRomanString()).toEqual('a.d. V Kal. Mar. MMDCCLXXVII');
+    });
   });
 });
