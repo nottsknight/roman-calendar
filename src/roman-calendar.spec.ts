@@ -1,20 +1,22 @@
 import {RomanDate} from './roman-calendar';
 
 describe('RomanCalendar', () => {
-  it('can be constructed with timestamp', () => {
-    const d = new RomanDate(0);
-    expect(d).toBeTruthy();
-  });
+  describe('constructor', () => {
+    it('works with timestamp', () => {
+      const d = new RomanDate(0);
+      expect(d).toBeTruthy();
+    });
 
-  it('can be constructed with a time string', () => {
-    const d = new RomanDate('1970-01-01');
-    expect(d).toBeTruthy();
-  });
+    it('works with a time string', () => {
+      const d = new RomanDate('1970-01-01');
+      expect(d).toBeTruthy();
+    });
 
-  it('can be constructed with another Date', () => {
-    const d0 = new Date('1970-01-01');
-    const d = new RomanDate(d0);
-    expect(d).toBeTruthy();
+    it('works with another Date', () => {
+      const d0 = new Date('1970-01-01');
+      const d = new RomanDate(d0);
+      expect(d).toBeTruthy();
+    });
   });
 
   it('produces a correct short date string', () => {
