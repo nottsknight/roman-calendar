@@ -4,7 +4,7 @@ import {RomanDate} from './roman-calendar';
 
 const program = new Command();
 program
-  .version('0.7.0', '-v, --version')
+  .version('0.7.1', '-v, --version')
   .description('Display a given date according to the Roman calendar.')
   .option('-l, --long', 'output long date')
   .argument('[date]', 'ISO date string, defaults to today')
