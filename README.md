@@ -17,12 +17,17 @@ it will format the current date.
 
 ## Examples
 
-Using the `kalendarium` script:
+Using the `kalendarium` script assuming the current date is 25 January 2000:
 
 ```console
-$ kalendarium 2000-01-25
+$ kalendarium
 a.d. VIII Kal. Feb. MMDCCLIII
-ante diem octavum Kalendas Februarius MMDCCLIII
+$ kalendarium -l
+ante diem octavum Kalendas Februarii MMDCCLIII
+$ kalendarium 2024-20-01
+a.d. XII Kal. Feb. MMDCCLXXVII
+$ kalendarium -l 2024-20-01
+ante diem duodecimum Kalendas Februarii MMDCCLXXVII
 ```
 
 Using the library in your own script:
