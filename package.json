@@ -1,6 +1,6 @@
 {
   "name": "roman-calendar",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Package for formatting dates according to the Roman calendar",
   "homepage": "https://github.com/nottsknight/roman-calendar",
   "exports": "./dist/roman-calendar.js",
@@ -33,5 +33,8 @@
     "gts": "^5.2.0",
     "jasmine": "^5.1.0",
     "typescript": "~5.2.0"
+  },
+  "dependencies": {
+    "commander": "^11.1.0"
   }
 }

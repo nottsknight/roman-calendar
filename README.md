@@ -1,7 +1,6 @@
 # roman-calendar
 
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
-
 ![Build](https://github.com/nottsknight/roman-calendar/actions/workflows/build-test.yml/badge.svg)
 
 JS library for formatting dates according to the Roman calendar,
