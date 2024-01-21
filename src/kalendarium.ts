@@ -8,18 +8,19 @@ program
   .description('Display a given date according to the Roman calendar.')
   .option('-l, --long', 'output long date')
   .argument('[date]', 'ISO date string, defaults to today')
+  .action(main)
   .parse();
 
-const iso_date = /\d{4}-\d{2}-\d{2}/;
-const input = program.args[0];
-if (input && !input.match(iso_date)) {
-  throw new Error('Must enter a valid ISO date string (yyyy-mm-dd)');
-}
+function main(date: string | undefined, opts: {long: boolean}) {
+  if (date && !date.match(/\d{4}-\d{2}-\d{2}/)) {
+    console.log('Please enter a valid date (format: yyyy-mm-dd)');
+    return;
+  }
 
-const opts = program.opts();
-const date = new RomanDate(program.args[0]);
-if (opts.long) {
-  console.log(date.toLongRomanString());
-} else {
-  console.log(date.toShortRomanString());
+  const dateObj = new RomanDate(date);
+  if (opts.long) {
+    console.log(dateObj.toLongRomanString());
+  } else {
+    console.log(dateObj.toShortRomanString());
+  }
 }
